@@ -1,3 +1,6 @@
+import { pathEq } from 'ramda'
+import { width } from './helpers'
+
 // prettier-ignore
 export const I = [
   [1],
@@ -44,8 +47,13 @@ export const L = [
   [1, 1],
 ] as const
 
-export const rotate = (tetromino: number[][]) =>
+export type Tetromino = ReadonlyArray<ReadonlyArray<1 | 0>>
+
+export const hasBlockAt = (tetromino: Tetromino, row: number, column: number): boolean =>
+  pathEq([row, column], 1, tetromino)
+
+export const rotate = (tetromino: Tetromino) =>
   tetromino.reduce(
     (acc, row) => acc.map((r, i) => [row[i], ...r]),
-    Array(tetromino[0].length).fill([]),
-  ) as number[][]
+    Array(width(tetromino)).fill([]),
+  ) as Tetromino
