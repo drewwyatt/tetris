@@ -1,3 +1,5 @@
+import Direction from './direction'
+import { dec, inc } from 'ramda'
 import { Tetromino, hasBlockAt } from './tetrominos'
 
 export const BOARD_WIDTH = 12
@@ -8,6 +10,8 @@ export enum Space {
   Player,
   Pile,
 }
+
+const isPlayer = (space: Space): space is Space.Player => space === Space.Player
 
 export type Board = Space[][]
 
@@ -24,3 +28,11 @@ export const add = (board: Board, tetromino: Tetromino): Board =>
     ],
     [] as Board,
   )
+
+const adjustPlayerX = (adjust: (n: number) => number) => (board: Board): Board => board.reduce((acc, row, idx) => {
+  const playerSpaces =
+}, [])
+
+export const movePlayer = (board: Board, direction: Direction): Board => {
+
+}
